@@ -967,22 +967,52 @@
 <section>
   <div class="slide-body">
     <hr class="sig-rule">
-    <h2>Mit projekt</h2>
-    <p class="lead">Det her er et rigtigt projekt. Strukturen er den, I så i del I, nu med indhold.</p>
+    <h2>Mappen</h2>
+    <p class="lead">Skabelonen til workshoppen. Samme struktur som i mine egne projekter.</p>
     <div class="def-box">
-      <pre style="font-family: 'DejaVu Sans Mono', Menlo, Consolas, monospace; font-size:0.50em; line-height:1.8; margin:0; color:var(--ink); white-space:pre; background:none; box-shadow:none; width:auto;">projekt/
+      <pre style="font-family: 'DejaVu Sans Mono', Menlo, Consolas, monospace; font-size:0.50em; line-height:1.5; margin:0; color:var(--ink); white-space:pre; background:none; box-shadow:none; width:auto;">projekt/
   data/            — anonymiseret data, eller kun en sti til dem
-  analyse/         — scripts og output
-  manuskript/      — artiklen, afsnit for afsnit
-  referencer.bib   — med kommentarer om, hvad der er tjekket
+  analysis/        — scripts; output/ er det, teksten må citere
+  manuscript/      — artiklen, afsnit for afsnit
+  feedback/        — medforfatternes noter og reviews, som de kom
+  references.bib   — kun tjekkede referencer
   <span class="em">CLAUDE.md</span>        — hvordan modellen skal arbejde i mappen
-  <span class="em">skrivestil.md</span>    — hvad der er forbudt, og hvad der kræves
-  <span class="em">plan.md</span>          — hvad artiklen skal vise, og ændringer undervejs
-  <span class="em">todo.md</span>          — åbne opgaver, bl.a. referencer der skal tjekkes</pre>
+  <span class="em">style.md</span>         — hvad der er forbudt, og hvad der kræves
+  <span class="em">plan.md</span>          — hvad artiklen skal vise, og beslutninger
+  <span class="em">todo.md</span>          — åbne opgaver, bl.a. referencer der skal tjekkes
+  .claude/agents/  — to kontrol-agenter</pre>
     </div>
     <p class="coda">De fire markerede filer er infrastrukturen. Modellen læser dem, hver gang den arbejder.</p>
   </div>
-  <aside class="notes">Vis den rigtige mappe på skærmen her.</aside>
+  <aside class="notes">Vis den rigtige mappe på skærmen her. Link til skabelonen: [GITHUB-LINK]</aside>
+</section>
+
+<!-- ==================== 16 · ARBEJDSGANG I MAPPEN ==================== -->
+<section>
+  <div class="slide-body">
+    <hr class="sig-rule">
+    <h2>Sådan arbejder man i mappen</h2>
+    <div class="two-col">
+      <div>
+        <span class="label">Teksten</span>
+        <ul>
+          <li>Førsteudkast gemmes i manuscript/llm_originals/</li>
+          <li>I retter i selve filen. Forskellen viser modellen jeres præferencer</li>
+          <li>Kommentarer skrives direkte i teksten som XX ... XX</li>
+        </ul>
+      </div>
+      <div>
+        <span class="label">Tal, kilder og beslutninger</span>
+        <ul>
+          <li>Hvert tal i manuskriptet skal findes i analysis/output/</li>
+          <li>En foreslået reference står i todo.md, indtil I selv har åbnet den</li>
+          <li>Beslutninger i plan.md er dateret og genåbnes ikke uden grund</li>
+        </ul>
+      </div>
+    </div>
+    <p class="coda">Reglerne står i filerne, ikke i jeres hukommelse eller i en chat.</p>
+  </div>
+  <aside class="notes">Peg frem mod "Agenter, der tjekker hinanden": code-check og claim-check kontrollerer, at reglerne er overholdt.</aside>
 </section>
 
 <!-- ==================== 17 · LLM-ISMER FØR/EFTER ==================== -->
