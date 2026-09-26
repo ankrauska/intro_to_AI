@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI i klinisk forskning</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/simple.css">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,300;1,8..60,400;1,8..60,600&family=Nunito:wght@300;400;500;600&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --indigo-900: #2E3A5C;
+    --indigo-700: #4B5E8A;
+    --indigo-500: #7B90C0;
+    --indigo-200: #C8D2E8;
+    --indigo-50:  #F0F2F8;
+    --amber-700:  #8A6030;
+    --amber-500:  #B07D3A;
+    --amber-100:  #F5ECD8;
+    --ink:        #252220;
+    --charcoal:   #3A3530;
+    --stone-600:  #6B6258;
+    --stone-400:  #9C9189;
+    --stone-200:  #D4CEC7;
+    --linen:      #F0EDE7;
+    --linen-warm: #EAE5DD;
+    --paper:      #F7F5F1;
+    --white:      #FDFCFA;
+    --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --sans:  'Nunito', 'Nunito Sans', system-ui, sans-serif;
+  }
+
+  .reveal-viewport { background: var(--linen); }
+  .reveal { font-family: var(--sans); color: var(--charcoal); }
+
+  .reveal h1, .reveal h2, .reveal h3 {
+    font-family: var(--serif);
+    color: var(--ink);
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: -0.01em;
+  }
+  .reveal h1 { font-size: 2.0em; line-height: 1.15; }
+  .reveal h2 { font-size: 1.45em; line-height: 1.2; margin-bottom: 0.1em; }
+
+  .reveal p {
+    font-family: var(--serif);
+    color: var(--charcoal);
+    line-height: 1.7;
+    font-size: 0.82em;
+  }
+
+  .reveal ul { list-style: none; padding: 0; margin: 0; }
+  .reveal ul li {
+    font-family: var(--sans);
+    font-size: 0.66em;
+    color: var(--charcoal);
+    line-height: 1.5;
+    padding: 4px 0 4px 20px;
+    position: relative;
+  }
+  .reveal ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 15px;
+    width: 8px;
+    height: 2px;
+    background: var(--indigo-500);
+    border-radius: 1px;
+  }
+  .reveal ul li ul { margin-top: 4px; }
+  .reveal ul li ul li { font-size: 0.92em; color: var(--stone-600); }
+  .reveal ul li ul li::before { background: var(--stone-400); width: 5px; }
+
+  .sig-rule {
+    width: 36px;
+    height: 2px;
+    background: var(--indigo-700);
+    border: none;
+    margin: 0 0 18px 0;
+    border-radius: 1px;
+  }
+
+  .reveal hr.divider {
+    border: none;
+    border-top: 1px solid var(--stone-200);
+    margin: 20px 0;
+    width: 100%;
+  }
+
+  .reveal .label {
+    font-family: var(--sans);
+    font-size: 0.55em;
+    font-weight: 600;
+    color: var(--indigo-700);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .reveal .lead {
+    font-family: var(--serif);
+    font-size: 0.80em;
+    color: var(--charcoal);
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+
+  .reveal .coda {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.70em;
+    color: var(--stone-600);
+    line-height: 1.6;
+    margin-top: 18px;
+  }
+
+  .reveal .em { color: var(--indigo-700); font-weight: 600; }
+  .reveal .muted { color: var(--stone-400); font-size: 0.9em; }
+
+  .reveal .slide-body { text-align: left; max-width: 860px; margin: 0 auto; }
+  .reveal .slide-body-wide { text-align: left; max-width: 980px; margin: 0 auto; }
+
+  /* Definition / callout box */
+  .reveal .def-box {
+    background: var(--indigo-50);
+    border-left: 3px solid var(--indigo-700);
+    border-radius: 0 4px 4px 0;
+    padding: 14px 20px;
+    margin: 12px 0;
+  }
+  .reveal .def-box .def-term {
+    font-family: var(--sans);
+    font-size: 0.58em;
+    font-weight: 600;
+    color: var(--indigo-700);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 5px;
+  }
+  .reveal .def-box .def-body {
+    font-family: var(--serif);
+    font-size: 0.80em;
+    color: var(--ink);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* Warning box (amber) */
+  .reveal .warn-box {
+    background: var(--amber-100);
+    border-left: 3px solid var(--amber-700);
+    border-radius: 0 4px 4px 0;
+    padding: 14px 20px;
+    margin: 12px 0;
+  }
+  .reveal .warn-box .def-term { color: var(--amber-700); }
+
+  /* Two-column layout */
+  .reveal .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+    margin-top: 10px;
+  }
+  .reveal .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 28px;
+    margin-top: 10px;
+  }
+
+  /* Comparison table */
+  .reveal table.cmp {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--sans);
+    font-size: 0.54em;
+    margin-top: 6px;
+  }
+  .reveal table.cmp th {
+    text-align: left;
+    font-weight: 600;
+    color: var(--indigo-700);
+    font-size: 0.85em;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    border-bottom: 2px solid var(--indigo-200);
+  }
+  .reveal table.cmp td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--stone-200);
+    color: var(--charcoal);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .reveal table.cmp td.tool {
+    font-family: var(--serif);
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 1.05em;
+  }
+
+  /* Before / after writing example */
+  .reveal .before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 8px; }
+  .reveal .ba-card { padding: 10px 16px; border-radius: 0 4px 4px 0; }
+  .reveal .ba-card.before { background: var(--amber-100); border-left: 3px solid var(--amber-500); }
+  .reveal .ba-card.after  { background: var(--indigo-50);  border-left: 3px solid var(--indigo-700); }
+  .reveal .ba-card .ba-tag {
+    font-family: var(--sans); font-size: 0.52em; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; display: block;
+  }
+  .reveal .ba-card.before .ba-tag { color: var(--amber-700); }
+  .reveal .ba-card.after  .ba-tag { color: var(--indigo-700); }
+  .reveal .ba-card p {
+    font-family: var(--serif); font-size: 0.58em; line-height: 1.6; margin: 0; color: var(--ink);
+  }
+
+  /* Flow diagram (safety) */
+  .reveal .flow { display: flex; flex-direction: column; align-items: center; gap: 0; margin-top: 6px; }
+  .reveal .flow-node {
+    font-family: var(--serif); font-size: 0.70em; color: var(--ink); line-height: 1.4;
+    background: var(--white); border: 1px solid var(--stone-200); border-radius: 4px;
+    padding: 10px 16px; text-align: center; min-width: 220px; max-width: 300px;
+  }
+  .reveal .flow-node.q { border-color: var(--indigo-500); font-weight: 600; }
+  .reveal .flow-node.stop { background: var(--amber-100); border-color: var(--amber-500); }
+  .reveal .flow-node.ok { background: var(--indigo-50); border-color: var(--indigo-700); }
+  .reveal .flow-branch { display: grid; grid-template-columns: 1fr 1.7fr; gap: 24px; width: 100%; max-width: 960px; }
+  .reveal .flow-branch .flow-branch { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .reveal .flow-col { display: flex; flex-direction: column; align-items: center; }
+  .reveal .flow-edge {
+    font-family: var(--sans); font-size: 0.52em; font-weight: 600; color: var(--stone-600);
+    letter-spacing: 0.05em; text-transform: uppercase; padding: 6px 0;
+    position: relative;
+  }
+  .reveal .flow-edge::before {
+    content: ''; display: block; width: 1px; height: 12px; background: var(--stone-400); margin: 0 auto 3px;
+  }
+
+  /* Agent pipeline */
+  .reveal .pipeline { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: 10px; margin-top: 14px; }
+  .reveal .agent {
+    background: var(--white); border: 1px solid var(--stone-200); border-top: 3px solid var(--indigo-700);
+    border-radius: 0 0 4px 4px; padding: 14px 16px; text-align: left; min-height: 150px;
+  }
+  .reveal .agent .agent-name { font-family: var(--serif); font-size: 0.78em; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .reveal .agent .agent-role { font-family: var(--sans); font-size: 0.58em; color: var(--stone-600); line-height: 1.5; }
+  .reveal .agent.check { border-top-color: var(--amber-500); }
+  .reveal .arrow { font-family: var(--serif); color: var(--stone-400); font-size: 1.2em; }
+
+  /* Stat callout */
+  .reveal .stat-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; margin: 18px 0 14px; }
+  .reveal .stat-item { text-align: center; padding: 4px; }
+  .reveal .stat-item .stat-num {
+    font-family: var(--serif); font-size: 1.8em; font-weight: 600; color: var(--indigo-700);
+    line-height: 1; display: block; letter-spacing: -0.02em;
+  }
+  .reveal .stat-item .stat-accent { display: block; width: 24px; height: 2px; background: var(--indigo-500); margin: 10px auto; border-radius: 1px; }
+  .reveal .stat-item .stat-desc { font-family: var(--sans); font-size: 0.58em; color: var(--charcoal); line-height: 1.5; display: block; }
+
+  /* Title slide */
+  .reveal .title-slide { text-align: left; }
+  .reveal .title-content { max-width: 860px; margin: 0 auto; padding-top: 40px; }
+  .reveal .title-content h1 { margin-bottom: 14px; }
+  .reveal .title-content .subtitle {
+    font-family: var(--serif); font-style: italic; font-size: 0.72em; color: var(--stone-600); margin: 0 0 28px;
+  }
+  .reveal .title-content .meta { display: flex; align-items: flex-end; justify-content: space-between; max-width: 780px; }
+  .reveal .title-content .meta-block { line-height: 1.6; }
+  .reveal .title-content .meta-name { font-family: var(--sans); font-size: 0.62em; font-weight: 600; color: var(--charcoal); }
+  .reveal .title-content .meta-detail { font-family: var(--sans); font-size: 0.52em; color: var(--stone-400); }
+
+  /* Section break */
+  .reveal .section-break-inner { text-align: left; padding: 0 0 80px 80px; position: absolute; bottom: 0; }
+  .reveal .section-num {
+    font-family: var(--sans); font-size: 0.55em; font-weight: 600; color: var(--indigo-200);
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;
+  }
+  .reveal .section-title {
+    font-family: var(--serif); font-size: 2.3em; color: rgba(255,255,255,0.92);
+    line-height: 1.12; max-width: 720px; font-weight: 600; letter-spacing: -0.01em;
+  }
+  .reveal .section-sub {
+    font-family: var(--serif); font-style: italic; font-size: 0.8em; color: var(--indigo-200);
+    margin-top: 14px; max-width: 640px; line-height: 1.5;
+  }
+
+  /* Closing grid */
+  .reveal .close-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 28px; margin-top: 18px; }
+  .reveal .close-col .close-label {
+    font-family: var(--sans); font-size: 0.55em; font-weight: 600; color: var(--indigo-700);
+    letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 8px; display: block;
+  }
+  .reveal .close-col p { font-family: var(--serif); font-size: 0.76em; color: var(--charcoal); line-height: 1.65; margin: 0; }
+
+  /* FAQ */
+  .reveal .faq-q {
+    font-family: var(--serif); font-style: italic; font-size: 0.95em; color: var(--ink); line-height: 1.4;
+    margin: 0 0 14px; max-width: 800px;
+  }
+  .reveal .faq-tag {
+    font-family: var(--sans); font-size: 0.52em; font-weight: 600; color: var(--stone-400);
+    letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 10px;
+  }
+
+  .reveal .fragment { opacity: 0; transition: opacity 0.25s; }
+  .reveal .fragment.visible { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ==================== 1 · TITEL ==================== -->
+<section class="title-slide" data-background-color="#EAE5DD">
+  <div class="title-content">
+    <hr class="sig-rule">
+    <h1>AI i klinisk forskning</h1>
+    <p class="subtitle">Værktøjer, datasikkerhed og en arbejdsproces fra data til manuskript</p>
+    <div class="meta">
+      <div class="meta-block">
+        <div class="meta-name">Auden Nordberg Krauska</div>
+        <div class="meta-detail">Oktober 2026</div>
+      </div>
+      <div class="meta-block" style="text-align:right;">
+        <div class="meta-detail">Foredrag · 60 min<br>Spørgsmål · 30 min</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 2 · FOTOGRAFI OG MALERI ==================== -->
+<section>
+  <div class="slide-body">
+    <hr class="sig-rule">
+    <h2>Fotografiet dræbte ikke maleriet</h2>
+    <p class="lead">I 1839 erklærede maleren Paul Delaroche, at maleriet var dødt. Det var det ikke. Kameraet overtog det, det var bedre til, og malerne fik frie hænder til resten.</p>
+    <div class="two-col">
+      <div>
+        <span class="label">Det, kameraet overtog</span>
+        <ul>
+          <li>Portrætter på bestilling</li>
+          <li>Nøjagtig gengivelse</li>
+          <li>Dokumentation</li>
+        </ul>
+      </div>
+      <div>
+        <span class="label">Det, malerne fik plads til</span>
+        <ul>
+          <li>Lys, atmosfære og øjeblikke: impressionismen</li>
+          <li>Fortolkning frem for gengivelse</li>
+          <li>At vælge, hvad der er værd at male</li>
+        </ul>
+      </div>
+    </div>
+    <p class="coda">Sprogmodellerne er kameraet. Spørgsmålet er, hvad I vil male.</p>
+  </div>
+  <aside class="notes">Karls rammesætning. Pointen: teknologien tog ikke faget. Den tog gengivelsesarbejdet og efterlod fortolkningen.</aside>
+</section>
+
+<!-- ==================== 3 · RUTINE OG FAGLIGHED ==================== -->
+<section>
+  <div class="slide-body">
+    <hr class="sig-rule">
+    <h2>Mindre tid på rutinen. Mere tid til jeres faglighed.</h2>
+    <p class="lead">En stor del af forskningsarbejdet er gengivelse: litteratursøgning, formatering, standardkode og første udkast. Det kan sprogmodellerne overtage. Tilbage er det, kun I kan: at stille det rigtige spørgsmål, vurdere svaret og stå inde for konklusionen.</p>
+    <ul>
+      <li>Hvad værktøjerne faktisk overtager, og hvor de fejler</li>
+      <li>Hvordan man bruger dem uden at sætte patientdata på spil</li>
+      <li>En hel forskningsproces, vist som den reelt foregår</li>
+    </ul>
+    <p class="coda">Jeg påstår ikke, at AI erstatter faglighed. Hele foredraget handler om at få rutinen af vejen, så fagligheden får pladsen.</p>
+  </div>
+</section>
+
+<!-- ==================== 3b · TO FORBEHOLD ==================== -->
+<section>
+  <div class="slide-body">
+    <hr class="sig-rule">
+    <h2>To ting, før vi går i gang</h2>
+    <div class="two-col" style="margin-top:22px;">
+      <div>
+        <span class="label">Hvem jeg er</span>
+        <p style="font-size:0.76em;">Jeg er statistiker og forsker i validering af sprogmodeller. Jeg er ikke kliniker. Det faglige er jeres. Jeg kan fortælle, hvad værktøjerne kan, og hvordan man kontrollerer dem.</p>
+      </div>
+      <div>
+        <span class="label">Sig til, hvis I ikke kan høre mig</span>
+        <p style="font-size:0.76em;">Jeg har en blød stemme, og dansk er mit andetsprog. Jeg gentager gerne, taler højere, eller skifter til engelsk, hvis det er lettere for nogen.</p>
+      </div>
+    </div>
+    <p class="coda">Spørgsmål undervejs er velkomne, også dem, der handler om, hvad jeg lige sagde.</p>
+  </div>
+</section>
+
+<!-- ==================== 3c · HVORDAN DE VIRKER ==================== -->
+<section>
+  <div class="slide-body">
+    <hr class="sig-rule">
+    <h2>Hvordan en sprogmodel bliver til</h2>
+    <p class="lead">To trin. Det andet forklarer det meste af dens personlighed.</p>
+    <div class="two-col">
+      <div>
+        <span class="label">1 · Forudsig næste ord</span>
+        <p style="font-size:0.70em;">Trænet på enorme tekstmængder til én ting: at gætte næste ord. Derfor er sproget flydende, og derfor er teksten <em>sandsynlig</em>, ikke nødvendigvis sand.</p>
+      </div>
+      <div>
+        <span class="label">2 · Lær, hvad mennesker foretrækker</span>
+        <p style="font-size:0.70em;">Derefter justeret efter menneskers vurderinger: folk valgte de svar, de bedst kunne lide: hjælpsomme, imødekommende og sikre i tonen.</p>
+      </div>
+    </div>
+    <div class="def-box" style="margin-top:10px; padding:10px 18px;">
+      <div class="def-term">Konsekvensen</div>
+      <p class="def-body" style="font-size:0.70em;">Modellen er trænet til at <em>ligne</em> et godt svar. Selvsikkerheden er ikke viden, men opdragelse. Derfor siger den sjældent "det ved jeg ikke".</p>
+    </div>
+  </div>
+  <aside class="notes">Det her slide er nøglen til begrænsningsslidet senere: behage-trangen og den sikre tone er trænet ind, ikke en fejl, der bliver rettet i næste version.</aside>
+</section>
+
+<!-- ==================== 3 · LÆSE OG FINDE, IKKE BEDØMME ==================== -->
+<section>
+  <div class="slide-body">
+    <hr class="sig-rule">
+    <h2>Gode til at læse og finde. Ikke til at bedømme.</h2>
+    <div class="two-col">
+      <div>
+        <span class="label">Det, de gør godt</span>
+        <ul>
+          <li>Læse store mængder tekst hurtigt</li>
+          <li>Finde og sammenfatte relevante kilder</li>
+          <li>Omskrive, strukturere og oversætte</li>
+          <li>Skrive og rette kode</li>
+        </ul>
+      </div>
+      <div>
+        <span class="label">Det, de ikke kan</span>
+        <ul>
+          <li>Vide, om noget er sandt</li>
+          <li>Vurdere klinisk relevans</li>
+          <li>Tage ansvar for en konklusion</li>
+          <li>Kende jeres data bedre end jer</li>
+        </ul>
+      </div>
+    </div>
+    <div class="def-box" style="margin-top:22px;">
+      <div class="def-term">Grundprincip</div>
+      <p class="def-body">Spørg ikke sprogmodellen om svaret. Spørg den, hvor svaret kan findes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 3d · DEPTH OF KNOWLEDGE ==================== -->
+<section>
+  <div class="slide-body-wide">
+    <hr class="sig-rule">
+    <h2>Et hierarki af spørgsmål</h2>
+    <p class="lead" style="font-size:0.72em; margin-bottom:8px;">Norman Webb (University of Wisconsin&ndash;Madison) udviklede Depth of Knowledge til at beskrive, hvor dyb tænkning et spørgsmål kræver. Rammen er lavet til undervisning, men den passer godt på sprogmodeller.</p>
+    <table class="cmp">
+      <thead>
+        <tr><th>Niveau</th><th>Spørgsmålet lyder</th><th>For en sprogmodel</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tool">1 &middot; Genkaldelse</td>
+          <td>Hvad, hvor, hvornår, hvem?</td>
+          <td>Let. Selv små, billige modeller klarer det, og svaret peger på noget, I selv kan slå op</td>
+        </tr>
+        <tr>
+          <td class="tool">2 &middot; Begreber</td>
+          <td>Sammenlign, organisér, opsummér</td>
+          <td>Stadig sikkert terræn, når kilderne er givet</td>
+        </tr>
+        <tr>
+          <td class="tool">3 &middot; Strategisk tænkning</td>
+          <td>Begrund, vurdér, drag en konklusion</td>
+          <td>Her begynder det at kræve struktur fra jer</td>
+        </tr>
+        <tr>
+          <td class="tool">4 &middot; Udvidet tænkning</td>
+          <td>Syntese på tværs af kilder, design af et studie</td>
+          <td>Kun med jeres stilladsering, og med jer som dommer</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="coda">Jo højere niveau, jo mere struktur skal I selv lægge ind i prompten.</p>
+  </div>
+  <aside class="notes">Webb udviklede DOK i 1997 på Wisconsin Center for Education Research. Personlig krog: mit eget universitet.</aside>
+</section>
+
+<!-- ==================== 3e · PROMPT-RAMMEN ==================== -->
+<section>
+  <div class="slide-body">
+    <hr class="sig-rule">
+    <h2>Sådan bygger man en prompt til de høje niveauer</h2>
+    <p class="lead">Niveau 1 og 2 kan I bare spørge om. Niveau 3 og 4 deler I op i tre trin, i denne rækkefølge, i samme prompt.</p>
+    <div class="three-col" style="margin-top:14px;">
+      <div>
+        <span class="label">1 &middot; Bed om evidensen</span>
+        <p style="font-size:0.68em;">Delt op i enkeltdele: fund for fund, kilde for kilde. Ikke en samlet konklusion.</p>
+      </div>
+      <div>
+        <span class="label">2 &middot; Bed om begrundelsen</span>
+        <p style="font-size:0.68em;">Hvordan hænger delene sammen, og hvad taler imod?</p>
+      </div>
+      <div>
+        <span class="label">3 &middot; Bed om vurderingen til sidst</span>
+        <p style="font-size:0.68em;">Først når evidens og begrundelse ligger der. Og det er jer, der afgør, om I er enige.</p>
+      </div>
+    </div>
+    <p class="coda">Rækkefølgen tvinger modellen til at vise sit arbejde, før den konkluderer.</p>
+  </div>
+</section>
+
+<!-- ==================== 4 · DAGENS PLAN ==================== -->
+<section>
+  <div class="slide-body">
+    <hr class="sig-rule">
+    <h2>Dagens plan</h2>
+    <div class="three-col" style="margin-top:22px;">
+      <div>
+        <span class="label">I · Værktøjerne</span>
+        <p style="font-size:0.72em;">Et overblik over, hvad der findes, fra litteratursøgning til dataanalyse.</p>
+      </div>
+      <div>
+        <span class="label">II · Sikkerhed</span>
+        <p style="font-size:0.72em;">Patientdata, GDPR, og hvordan man vælger et beskyttet niveau.</p>
+      </div>
+      <div>
+        <span class="label">III · Demonstration</span>
+        <p style="font-size:0.72em;">Min egen proces: en videnskabelig artikel bygget med Claude Code.</p>
+      </div>
+    </div>
+    <hr class="divider">
+    <p class="muted" style="font-family:var(--sans);">Derefter: 30 minutters spørgsmål.</p>
+  </div>
+</section>
+
+<!-- ==================== SEKTION I ==================== -->
+<section data-background-color="#2E3A5C">
+  <div class="section-break-inner">
+    <div class="section-num">Del I</div>
+    <div class="section-title">Værktøjerne</div>
+    <div class="section-sub">Et overblik over værktøjerne, med verifikation som den røde tråd</div>
+  </div>
+</section>
+
+<!-- ==================== 5 · LANDSKABET ==================== -->
+<section>
+  <div class="slide-body-wide">
+    <hr class="sig-rule">
+    <h2>Hvad der findes</h2>
+    <p class="lead" style="font-size:0.74em;">Jeg kan ikke fortælle jer, hvilket værktøj der passer til hvilken klinisk forskningsopgave. Men her er landskabet, som det ser ud i dag.</p>
+    <div class="three-col">
+      <div>
+        <span class="label">Chat-assistenterne</span>
+        <p style="font-size:0.66em; margin-bottom:6px;">ChatGPT, Claude, Gemini, Copilot. Almen skrive-, læse- og kodehjælp i en browser. Ofte det, institutionen har licens til.</p>
+      </div>
+      <div>
+        <span class="label">Forskningsværktøjer</span>
+        <p style="font-size:0.66em; margin-bottom:6px;">Elicit og lignende: bygget til litteratursøgning og dataudtræk fra artikler, med links til kilderne.</p>
+      </div>
+      <div>
+        <span class="label">Agentiske værktøjer</span>
+        <p style="font-size:0.66em; margin-bottom:6px;">Claude Code: et helt projekt i én mappe med data, planer, tekst og agenter, der arbejder efter jeres regler.</p>
+      </div>
+    </div>
+    <hr class="divider">
+    <p class="coda">De næste slides tager ét eksempel fra hver gruppe. Derefter: hvad der findes på europæisk grund.</p>
+  </div>
+</section>
+
+<!-- ==================== 6 · ELICIT ==================== -->
+<section>
+  <div class="slide-body">
+    <hr class="sig-rule">
+    <h2>Litteratursøgning med Elicit</h2>
+    <p class="lead">En hjemmeside, der ikke kræver installation. I stiller et forskningsspørgsmål i almindeligt sprog, og Elicit finder artikler og udtrækker de oplysninger, I beder om.</p>
+    <div class="two-col">
+      <div>
+        <span class="label">Klassisk søgning</span>
+        <p style="font-size:0.7em; font-family:var(--sans);">(cochlear implant* OR CI) AND (child* OR pediatric) AND (language outcome*)</p>
+      </div>
+      <div>
+        <span class="label">Elicit</span>
+        <p style="font-size:0.7em; font-style:italic;">"Hvad er evidensen for sprogudvikling hos børn med cochlear implant, opereret før 12 måneder?"</p>
+      </div>
+    </div>
+    <hr class="divider">
+    <ul>
+      <li>Godt til: overblik, at finde det I ikke vidste fandtes, og at genfinde en artikel, I engang læste og ikke helt kan huske</li>
+      <li>Erstatter ikke: en systematisk søgning med dokumenteret søgestrategi af den slags, Cochrane kræver</li>
+      <li>Altid: åbn kilden og læs den, før den citeres</li>
+    </ul>
+  </div>
+  <aside class="notes">Vis live hvis muligt. Pointen: Elicit linker til rigtige kilder, i modsætning til en chat, der kan opfinde referencer.</aside>
+</section>
+
+<!-- ==================== 7 · CHAT-ASSISTENTERNE ==================== -->
+<section>
+  <div class="slide-body">
+    <hr class="sig-rule">
+    <h2>Chat-assistenterne: afgrænsede opgaver</h2>
+    <p class="lead">Bedst til opgaver med ét klart output, hvor I kan læse resultatet og vurdere det med det samme.</p>
+    <ul>
+      <li>Sammenfatte et mødereferat eller en optagelse med medforfattere: hvad skal ændres, og hvem gør det?</li>
+      <li>Ordne løse idéer til konkrete projekter og næste skridt</li>
+      <li>Sprogrettelse på engelsk, uden at meningen forskubbes</li>
+      <li>Oversættelse begge veje</li>
+      <li>Et udkast til en mail til en reviewer eller en fond</li>
+    </ul>
+    <p class="coda">Større projekter som protokoller, manuskripter og abstracts fungerer bedre i en struktureret projektarbejdsgang, hvor data, planer og tekst holdes sammen. Det er det, Claude Code er bygget til.</p>
+  </div>
+</section>
+
+<!-- ==================== 7b · BEGRÆNSNINGER ==================== -->
+<section>
+  <div class="slide-body-wide">
+    <hr class="sig-rule">
+    <h2>Begrænsningerne</h2>
+    <div class="two-col" style="gap:28px;">
+      <div>
+        <ul>
+          <li><span class="em">Den vil gerne behage.</span> Den vil have, at jeres studie lyder godt, og siger sjældent "det her holder ikke"</li>
+          <li><span class="em">Den opfinder kilder.</span> En reference kan se helt rigtig ud og ikke findes</li>
+          <li><span class="em">Den kender ikke jeres data.</span> Kun det, I har fortalt den</li>
+        </ul>
+      </div>
+      <div>
+        <ul>
+          <li><span class="em">Den lyder altid sikker.</span> Tonen siger intet om, hvor sikker den faktisk er</li>
+          <li><span class="em">Den glemmer.</span> I lange samtaler styrer det, I sagde først, ikke slutningen</li>
+          <li><span class="em">Den vil have en pæn historie.</span> Rene resultater og konklusioner, der lander, også når data ikke er sådan</li>
+        </ul>
+      </div>
+    </div>
+    <p class="coda">Ingen af dem er argumenter mod at bruge værktøjerne. De er argumenter for, at det er jer, der bedømmer.</p>
+  </div>
+  <aside class="notes">Den narrative trang er det, stildokumentet er bygget til at modvirke.</aside>
+</section>
+
+<!-- ==================== 8 · CLAUDE CODE: ET PROJEKT ==================== -->
+<section>
+  <div class="slide-body">
+    <hr class="sig-rule">
+    <h2>Claude Code: et projekt, ikke en samtale</h2>
+    <p class="lead">En chat glemmer. Et projekt husker, fordi alt ligger i en mappe på jeres egen computer, som modellen læser, hver gang den arbejder.</p>
+    <div class="two-col">
+      <div>
+        <span class="label">Det, der ligger i mappen</span>
+        <ul>
+          <li>Data og analysekode</li>
+          <li>Manuskriptet, afsnit for afsnit</li>
+          <li>Referencer</li>
+          <li>Dokumenter, der styrer arbejdet</li>
+        </ul>
+      </div>
+      <div>
+        <span class="label">Det, modellen kan</span>
+        <ul>
+          <li>Skrive og køre kode</li>
+          <li>Skrive og redigere tekst</li>
+          <li>Sætte flere agenter på hver sin opgave</li>
+          <li>Følge jeres regler hver gang</li>
+        </ul>
+      </div>
+    </div>
+    <p class="coda">De næste tre slides handler om de styrende dokumenter. Det er dem, der gør forskellen.</p>
+  </div>
+</section>
+
+<!-- ==================== 8a · SKRIVESTIL ==================== -->
+<section>
+  <div class="slide-body">
+    <hr class="sig-rule">
+    <h2>Skrivning styres af et stildokument</h2>
+    <p class="lead">Et dokument i mappen beskriver, hvordan der må skrives. Modellen læser det, før den skriver et ord.</p>
+    <ul>
+      <li>Forbudte ord og vendinger: <em>groundbreaking, underscores, delve, robust</em></li>
+      <li>Resultater rapporteres med effektstørrelse og konfidensinterval, ikke tillægsord</li>
+      <li>Begrænsninger skrives ligeud og "mitigeres" ikke</li>
+      <li>Ingen påstand i diskussionen uden et resultat bag sig</li>
+      <li>Jeres egne præferencer: struktur, tone, gammel kritik</li>
+    </ul>
+    <p class="coda">Det er her, man bekæmper den narrative trang: med regler i stedet for håb.</p>
+  </div>
+</section>
+
+<!-- ==================== 8b0 · PLANER OG AGENTER ==================== -->
+<section>
+  <div class="slide-body">
+    <hr class="sig-rule">
+    <h2>Ændringer styres af planer. Opgaver af agenter.</h2>
+    <div class="two-col">
+      <div>
+        <span class="label">Planlægningsdokumenter</span>
+        <ul>
+          <li>Hvad manuskriptet skal vise, og hvad det ikke skal</li>
+          <li>Ændringer i scope skrives ned, før de udføres</li>
+          <li>Medforfatternes ønsker bliver til konkrete punkter</li>
+          <li>Historikken bliver i mappen i stedet for i en glemt chat</li>
+        </ul>
+      </div>
+      <div>
+        <span class="label">Agenter til afgrænsede opgaver</span>
+        <ul>
+          <li>Én agent, én opgave: analysér, skriv afsnit, tjek</li>
+          <li>Kør samme opgave med flere modeller</li>
+          <li>Sammenlign svarene: uenighed er information</li>
+          <li>Sæt det bedste sammen, og notér hvorfor</li>
+        </ul>
+      </div>
+    </div>
+    <p class="coda">Planen bestemmer, og modellen udfører. Når to modeller er uenige, er det jer, der afgør det.</p>
+  </div>
+</section>
+
+<!-- ==================== 8b1 · CITATIONER ==================== -->
+<section>
+  <div class="slide-body">
+    <hr class="sig-rule">
+    <h2>Citationer: foreslået af modellen, valideret af jer</h2>
+    <p class="lead" style="margin-bottom:8px;">En foreslået reference er en opgave, ikke en kilde, før I selv har åbnet den.</p>
+    <ul>
+      <li>Hver foreslået reference ryger på en liste i <span class="em">todo.md</span>: fundet, læst, bekræftet?</li>
+      <li>I BibTeX-filen får hver post en kommentar: hvem tjekkede, hvornår, og hvad kilden faktisk siger</li>
+      <li>En reference uden kommentar er ikke klar til manuskriptet</li>
+          </ul>
+    <div class="def-box" style="margin-top:8px; padding:10px 18px;">
+      <p class="def-body" style="font-family:'DejaVu Sans Mono',Menlo,Consolas,monospace; font-size:0.52em; line-height:1.7; white-space:pre;">% TJEKKET 2026-09-12 ANK: RCT, n=84. Effekt ved 12 mdr., IKKE 24.
+@article{nielsen2024, ...}</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 8b · EUROPÆISKE MODELLER ==================== -->
+<section>
+  <div class="slide-body-wide">
+    <hr class="sig-rule">
+    <h2>På europæisk grund</h2>
+    <p class="lead" style="font-size:0.72em; margin-bottom:6px;">De store modeller er amerikanske. Der findes europæiske alternativer, og de bliver bedre.</p>
+    <table class="cmp">
+      <tbody>
+        <tr>
+          <td class="tool">Mistral (Le Chat)</td>
+          <td>Frankrig. Det stærkeste europæiske alternativ. EU-hostet som standard; flere modeller kan køres lokalt.</td>
+        </tr>
+        <tr>
+          <td class="tool">Aleph Alpha</td>
+          <td>Tyskland. Rettet mod organisationer med krav om datakontrol og lokal drift.</td>
+        </tr>
+        <tr>
+          <td class="tool">Danish Foundation Models</td>
+          <td>AU, KU, SDU og Alexandra Instituttet. Åbne danske modeller: forskningsinfrastruktur snarere end en ChatGPT-konkurrent.</td>
+        </tr>
+        <tr>
+          <td class="tool">EU-platforme</td>
+          <td>Fx Langdock: adgang til Claude, GPT og Mistral, hvor al behandling sker i EU.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="coda" style="margin-top:10px;">"Europæisk" er ikke det samme som "lovligt til patientdata". Det afgørende er stadig databehandleraftalen, og den indgår institutionen.</p>
+  </div>
+  <aside class="notes">Navnene skifter: Mistrals chat-produkt har muligvis skiftet navn i 2026, så tjek inden foredraget. Landskabet på dette slide er det, der ældes hurtigst.</aside>
+</section>
+
+<!-- ==================== 9 · VERIFIKATION ==================== -->
+<section>
+  <div class="slide-body">
+    <hr class="sig-rule">
+    <h2>Den røde tråd: verifikation</h2>
+    <div class="stat-row">
+      <div class="stat-item">
+        <span class="stat-num">Hver</span>
+        <span class="stat-accent"></span>
+        <span class="stat-desc">reference tjekkes mod den faktiske kilde</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">Hvert</span>
+        <span class="stat-accent"></span>
+        <span class="stat-desc">tal i teksten spores tilbage til analysens output</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">Hver</span>
+        <span class="stat-accent"></span>
+        <span class="stat-desc">konklusion bæres af et resultat, ikke af en formulering</span>
+      </div>
+    </div>
+    <hr class="divider">
+    <p class="lead">Det lyder som ekstra arbejde. Det er det også, men det er det samme arbejde, en god medforfatter altid har gjort. Forskellen er, at man kan bygge det ind i processen. Det vender jeg tilbage til.</p>
+  </div>
+</section>
+
+<!-- ==================== SEKTION II ==================== -->
+<section data-background-color="#2E3A5C">
+  <div class="section-break-inner">
+    <div class="section-num">Del II</div>
+    <div class="section-title">Sikkerhed og databeskyttelse</div>
+    <div class="section-sub">Én hård regel, tre beskyttelsesniveauer, og et diagram at tage med hjem</div>
+  </div>
+</section>
+
+<!-- ==================== 10 · DEN HÅRDE REGEL ==================== -->
+<section>
+  <div class="slide-body">
+    <hr class="sig-rule">
+    <h2>Den hårde regel</h2>
+    <div class="warn-box" style="margin-top:14px;">
+      <div class="def-term">Regel nr. 1</div>
+      <p class="def-body" style="font-size:0.95em;">Ingen identificerbare patientdata i en almindelig sprogmodel. Ikke audiogrammer med navn, ikke casebeskrivelser med kendetegn, ikke lyd- eller videooptagelser af patienter.</p>
+    </div>
+    <p class="lead" style="margin-top:22px;">"Almindelig" betyder: den gratis eller personlige version af ChatGPT, Claude, Gemini eller lignende, som I selv har oprettet med jeres egen e-mail.</p>
+    <ul>
+      <li>Gælder også "bare et enkelt eksempel"</li>
+      <li>Gælder også, hvis I sletter samtalen bagefter</li>
+      <li>Gælder også, hvis værktøjet er rigtig godt til opgaven</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== 11 · HVORFOR ==================== -->
+<section>
+  <div class="slide-body">
+    <hr class="sig-rule">
+    <h2>Hvorfor reglen er hård</h2>
+    <div class="three-col" style="margin-top:18px;">
+      <div>
+        <span class="label">Træning</span>
+        <p style="font-size:0.72em;">Forbrugerversioner kan som udgangspunkt bruge det, I skriver, til at træne fremtidige modeller.</p>
+      </div>
+      <div>
+        <span class="label">Dataflugt</span>
+        <p style="font-size:0.72em;">Data forlader institutionen og landet. I ved ikke, hvor de lagres, eller hvor længe.</p>
+      </div>
+      <div>
+        <span class="label">GDPR</span>
+        <p style="font-size:0.72em;">Helbredsdata er en særlig kategori. Uden databehandleraftale er brugen ikke lovlig, uanset hensigt.</p>
+      </div>
+    </div>
+    <hr class="divider">
+    <p class="coda">Det, der gør et værktøj lovligt at bruge med følsomme data, er ikke værktøjet selv, men aftalen bag det. Det er derfor, institutionens godkendte løsninger er den sikre vej.</p>
+  </div>
+  <aside class="notes">Det konkrete overblik over SDU og regionen kommer to slides senere.</aside>
+</section>
+
+<!-- ==================== 12 · TRE NIVEAUER ==================== -->
+<section>
+  <div class="slide-body-wide">
+    <hr class="sig-rule">
+    <h2>Tre beskyttelsesniveauer</h2>
+    <table class="cmp">
+      <thead>
+        <tr><th>Niveau</th><th>Hvad det er</th><th>Egnet til</th><th>Hvordan</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tool">1 · Træning slået fra</td>
+          <td>Den personlige konto, med "brug ikke mine data til træning" slået fra</td>
+          <td>Litteratur, metodetekst og kode, intet personfølsomt</td>
+          <td>En indstilling i appen. Tager ét minut.</td>
+        </tr>
+        <tr>
+          <td class="tool">2 · API eller institutionel konto</td>
+          <td>Adgang via API eller en konto, institutionen har licens til</td>
+          <td>Arbejde med aggregerede eller reelt anonymiserede data</td>
+          <td>API-input bruges ikke til træning. Spørg IT, hvad der findes.</td>
+        </tr>
+        <tr>
+          <td class="tool">3 · Zero data retention</td>
+          <td>Udbyderen gemmer hverken input eller output efter behandling</td>
+          <td>Alt, der ligger tæt på følsomme data, selv anonymiseret</td>
+          <td>Forhandles på organisationsniveau. Ikke en indstilling, I selv kan slå til.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="coda">Niveau 1 kan I gøre i aften. Niveau 2 og 3 er et spørgsmål til jeres databeskyttelsesrådgiver eller IT-afdeling.</p>
+  </div>
+  <aside class="notes">Overvej et screenshot af indstillingen i ChatGPT og Claude på et ekstra slide; mange ved ikke, den findes.</aside>
+</section>
+
+<!-- ==================== 12b · SDU OG OUH ==================== -->
+<section>
+  <div class="slide-body-wide">
+    <hr class="sig-rule">
+    <h2>Hvad I allerede har adgang til</h2>
+    <div class="two-col">
+      <div>
+        <span class="label">SDU</span>
+        <ul>
+          <li><span class="em">Copilot Chat</span> for alle ansatte: lukket miljø, når I er logget ind med SDU-konto</li>
+          <li><span class="em">Scite.ai</span> via biblioteket, også for ansatte på OUH og regionens sygehuse</li>
+          <li><span class="em">Transcriber</span> på UCloud til transskription af optagelser</li>
+        </ul>
+      </div>
+      <div>
+        <span class="label">Region Syddanmark / OUH</span>
+        <ul>
+          <li><span class="em">SydChat</span>: regionens egen chatbotplatform (AI-kompetenceenheden, Regional IT)</li>
+          <li><span class="em">Klinisk AI-Guide</span> fra CAI-X: sparring om AI-projekter i regionen</li>
+          <li>Regionens skriftlige retningslinjer findes på intranettet</li>
+        </ul>
+      </div>
+    </div>
+    <div class="def-box" style="margin-top:14px;">
+      <div class="def-term">SDU's regel for forskning</div>
+      <p class="def-body" style="font-size:0.72em;">SDU forbyder ingen værktøjer. Men til forskningsprojekter er det jer og jeres leder, der indestår for lovlig brug, og persondata må ikke i nogen af dem, heller ikke Copilot Chat.</p>
+    </div>
+  </div>
+  <aside class="notes">Kilde: sdunet.dk → AI på SDU → Retningslinjer. Verificér inden foredraget, at listen stadig er aktuel, og spørg Line om regionens interne retningslinjer.</aside>
+</section>
+
+<!-- ==================== 13 · BESLUTNINGSDIAGRAM ==================== -->
+<section>
+  <div class="slide-body-wide">
+    <hr class="sig-rule">
+    <h2>Før I indsætter noget</h2>
+    <svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:920px; display:block; margin:4px auto 0; font-family:var(--serif);" role="img" aria-label="Beslutningsdiagram for brug af data i sprogmodeller">
+      <g fill="none" stroke="#9C9189" stroke-width="1.5">
+        <path d="M 500 60 L 500 90 L 250 90 L 250 132"/>
+        <path d="M 500 60 L 500 90 L 720 90 L 720 132"/>
+        <path d="M 720 184 L 720 224 L 600 224 L 600 262"/>
+        <path d="M 720 184 L 720 224 L 880 224 L 880 262"/>
+      </g>
+      <g font-family="var(--sans)" font-size="13" font-weight="600" fill="#6B6258" letter-spacing="1">
+        <text x="238" y="120" text-anchor="end">NEJ</text>
+        <text x="708" y="120" text-anchor="end">JA</text>
+        <text x="588" y="252" text-anchor="end">NEJ</text>
+        <text x="868" y="252" text-anchor="end">JA</text>
+      </g>
+      <!-- Rod -->
+      <rect x="340" y="8" width="320" height="52" rx="4" fill="#FDFCFA" stroke="#7B90C0" stroke-width="1.5"/>
+      <text x="500" y="41" text-anchor="middle" font-size="21" font-weight="600" fill="#252220">Indeholder det patientdata?</text>
+      <!-- Nej: almindelig konto -->
+      <rect x="100" y="132" width="300" height="64" rx="4" fill="#F0F2F8" stroke="#4B5E8A" stroke-width="1.5"/>
+      <text x="250" y="159" text-anchor="middle" font-size="19" fill="#252220">Almindelig konto er fin</text>
+      <text x="250" y="183" text-anchor="middle" font-size="19" fill="#252220">med træning slået fra</text>
+      <!-- Ja: anonymiseret? -->
+      <rect x="575" y="132" width="290" height="52" rx="4" fill="#FDFCFA" stroke="#7B90C0" stroke-width="1.5"/>
+      <text x="720" y="165" text-anchor="middle" font-size="21" font-weight="600" fill="#252220">Er de reelt anonymiserede?</text>
+      <!-- Nej: stop -->
+      <rect x="465" y="262" width="270" height="96" rx="4" fill="#F5ECD8" stroke="#B07D3A" stroke-width="1.5"/>
+      <text x="600" y="292" text-anchor="middle" font-size="19" fill="#252220">Stop. Kun institutionens</text>
+      <text x="600" y="316" text-anchor="middle" font-size="19" fill="#252220">godkendte løsning,</text>
+      <text x="600" y="340" text-anchor="middle" font-size="19" fill="#252220">eller slet ikke</text>
+      <!-- Ja: ok -->
+      <rect x="762" y="262" width="230" height="96" rx="4" fill="#F0F2F8" stroke="#4B5E8A" stroke-width="1.5"/>
+      <text x="877" y="298" text-anchor="middle" font-size="19" fill="#252220">API, institutionel</text>
+      <text x="877" y="322" text-anchor="middle" font-size="19" fill="#252220">konto eller zero</text>
+      <text x="877" y="346" text-anchor="middle" font-size="19" fill="#252220">data retention</text>
+    </svg>
+    <p class="coda" style="text-align:center;">"Reelt anonymiseret" er en højere bar, end de fleste tror. Er I i tvivl, er svaret nej.</p>
+  </div>
+</section>
+
+<!-- ==================== SEKTION III ==================== -->
+<section data-background-color="#2E3A5C">
+  <div class="section-break-inner">
+    <div class="section-num">Del III</div>
+    <div class="section-title">Fra data til manuskript med Claude Code</div>
+    <div class="section-sub">Arbejdsgangen fra del I, vist på en rigtig artikel</div>
+  </div>
+</section>
+
+<!-- ==================== 15 · PROJEKTSTRUKTUR ==================== -->
+<section>
+  <div class="slide-body">
+    <hr class="sig-rule">
+    <h2>Mit projekt</h2>
+    <p class="lead">Det her er et rigtigt projekt. Strukturen er den, I så i del I, nu med indhold.</p>
+    <div class="def-box">
+      <pre style="font-family: 'DejaVu Sans Mono', Menlo, Consolas, monospace; font-size:0.50em; line-height:1.8; margin:0; color:var(--ink); white-space:pre; background:none; box-shadow:none; width:auto;">projekt/
+  data/            — anonymiseret data, eller kun en sti til dem
+  analyse/         — scripts og output
+  manuskript/      — artiklen, afsnit for afsnit
+  referencer.bib   — med kommentarer om, hvad der er tjekket
+  <span class="em">CLAUDE.md</span>        — hvordan modellen skal arbejde i mappen
+  <span class="em">skrivestil.md</span>    — hvad der er forbudt, og hvad der kræves
+  <span class="em">plan.md</span>          — hvad artiklen skal vise, og ændringer undervejs
+  <span class="em">todo.md</span>          — åbne opgaver, bl.a. referencer der skal tjekkes</pre>
+    </div>
+    <p class="coda">De fire markerede filer er infrastrukturen. Modellen læser dem, hver gang den arbejder.</p>
+  </div>
+  <aside class="notes">Vis den rigtige mappe på skærmen her.</aside>
+</section>
+
+<!-- ==================== 17 · LLM-ISMER FØR/EFTER ==================== -->
+<section>
+  <div class="slide-body-wide">
+    <hr class="sig-rule">
+    <h2>Sådan lyder en model, der er overladt til sig selv</h2>
+    <p class="lead" style="font-size:0.7em; margin-bottom:8px;">Eksemplerne er på engelsk, fordi det er dér, I skriver.</p>
+    <div class="before-after">
+      <div class="ba-card before">
+        <span class="ba-tag">Før</span>
+        <p>Our findings underscore the critical importance of early intervention and highlight a paradigm shift in how we conceptualize auditory rehabilitation, with profound implications for clinical practice.</p>
+      </div>
+      <div class="ba-card after">
+        <span class="ba-tag">Efter</span>
+        <p>Children implanted before 12 months scored 4.2 points higher on the language measure at 36 months (95% CI 1.1–7.3). The interval includes effects too small to be clinically meaningful.</p>
+      </div>
+    </div>
+    <div class="before-after" style="margin-top:10px;">
+      <div class="ba-card before">
+        <span class="ba-tag">Før</span>
+        <p>While some limitations exist, it is worth noting that the robust methodology employed largely mitigates these concerns, and the results remain highly compelling.</p>
+      </div>
+      <div class="ba-card after">
+        <span class="ba-tag">Efter</span>
+        <p>Follow-up was incomplete for 31% of participants, and those lost were more often from lower-income households. The estimate is therefore likely biased upward.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 18 · KENDETEGN ==================== -->
+<section>
+  <div class="slide-body">
+    <hr class="sig-rule">
+    <h2>Kendetegn på LLM-sprog</h2>
+    <div class="two-col">
+      <div>
+        <span class="label">Oppustning</span>
+        <ul>
+          <li><em>groundbreaking, paradigm shift, profound</em></li>
+          <li><em>underscores the critical importance of</em></li>
+          <li>Ethvert resultat lyder stærkere, end det er</li>
+        </ul>
+        <span class="label" style="margin-top:14px;">Udvanding</span>
+        <ul>
+          <li>Forbehold oven på forbehold</li>
+          <li>Begrænsninger, der straks "mitigeres"</li>
+        </ul>
+      </div>
+      <div>
+        <span class="label">Form</span>
+        <ul>
+          <li>Symmetriske afsnit med tre punkter hver</li>
+          <li>Punktopstillinger i stedet for argumenter</li>
+          <li><em>delve, leverage, robust, holistic</em></li>
+        </ul>
+        <span class="label" style="margin-top:14px;">Det farligste</span>
+        <ul>
+          <li>Konklusioner, der ikke kan spores til et resultat</li>
+        </ul>
+      </div>
+    </div>
+    <p class="coda">Det sidste er ikke et stilproblem. Det er et videnskabeligt problem, og det er det, kontrol-agenterne leder efter.</p>
+  </div>
+</section>
+
+<!-- ==================== 19 · AGENTER ==================== -->
+<section>
+  <div class="slide-body-wide">
+    <hr class="sig-rule">
+    <h2>Agenter, der tjekker hinanden</h2>
+    <p class="lead" style="font-size:0.76em;">Samme logik som en medforfatter, der gennemgår ens analyse, bare bygget ind i processen, så det sker hver gang.</p>
+    <div class="pipeline">
+      <div class="agent">
+        <div class="agent-name">Udkast</div>
+        <div class="agent-role">Skriver analysekoden og et første udkast til resultatafsnittet ud fra data og analyseplanen.</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="agent check">
+        <div class="agent-name">Kodekontrol</div>
+        <div class="agent-role">Genlæser koden uafhængigt, kører den igen, og sammenligner output. Rapporterer afvigelser.</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="agent check">
+        <div class="agent-name">Påstandskontrol</div>
+        <div class="agent-role">Går manuskriptet igennem sætning for sætning: kan hver påstand spores til et resultat eller en kilde?</div>
+      </div>
+    </div>
+    <div class="def-box" style="margin-top:20px;">
+      <div class="def-term">Og til sidst</div>
+      <p class="def-body">Mig. Agenterne finder uoverensstemmelser; de afgør ikke, hvad der er sandt. Det gør jeg.</p>
+    </div>
+  </div>
+  <aside class="notes">Vis live eller optaget: lad kontrol-agenten fange en overdreven påstand eller en reference, der ikke dækker sætningen. Det er de mest overbevisende 60 sekunder i foredraget.</aside>
+</section>
+
+<!-- ==================== 20 · HELE PIPELINEN ==================== -->
+<section>
+  <div class="slide-body">
+    <hr class="sig-rule">
+    <h2>Hele processen</h2>
+    <div class="stat-row" style="grid-template-columns: 1fr 1fr 1fr 1fr; gap:20px;">
+      <div class="stat-item">
+        <span class="stat-num" style="font-size:1.2em;">Data</span>
+        <span class="stat-accent"></span>
+        <span class="stat-desc">Anonymiseret i mappen, eller helt uden for den</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" style="font-size:1.2em;">Analyse</span>
+        <span class="stat-accent"></span>
+        <span class="stat-desc">Kode skrevet, kørt og genkørt</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" style="font-size:1.2em;">Resultater</span>
+        <span class="stat-accent"></span>
+        <span class="stat-desc">Output som teksten skal spores til</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" style="font-size:1.2em;">Manuskript</span>
+        <span class="stat-accent"></span>
+        <span class="stat-desc">Skrevet efter reglerne, tjekket påstand for påstand</span>
+      </div>
+    </div>
+    <hr class="divider">
+    <p class="lead">Kontrol sidder i hver samling mellem trinnene, ikke som en gennemlæsning til sidst. Og data behøver ikke ligge i mappen: den kan nøjes med analysekoden, som køres lokalt, hvor data er, så kun resultaterne lander i projektet.</p>
+  </div>
+</section>
+
+<!-- ==================== 21 · ÆRLIGT REGNSKAB ==================== -->
+<section>
+  <div class="slide-body">
+    <hr class="sig-rule">
+    <h2>Et ærligt regnskab</h2>
+    <div class="two-col">
+      <div>
+        <span class="label">Det, jeg sparede</span>
+        <ul>
+          <li>Tid på standardkode og fejlfinding</li>
+          <li>Formatering, tabeller, referencelister</li>
+          <li>Første udkast til afsnit, jeg kender indholdet af</li>
+          <li>Sprogrettelse</li>
+        </ul>
+      </div>
+      <div>
+        <span class="label">Det, der stadig krævede mig</span>
+        <ul>
+          <li>Studiedesign og analyseplan</li>
+          <li>Fortolkning: hvad betyder resultatet, og holder det?</li>
+          <li>Alle skøn og afvejninger</li>
+          <li>Det endelige ansvar for hvert ord</li>
+        </ul>
+      </div>
+    </div>
+    <p class="coda">Arbejdet flyttede sig. Det forsvandt ikke. Mindre tid på at skrive, mere tid på at specificere og kontrollere.</p>
+  </div>
+</section>
+
+<!-- ==================== 22 · TIDSSKRIFTER ==================== -->
+<section>
+  <div class="slide-body">
+    <hr class="sig-rule">
+    <h2>Hvad tidsskrifterne kræver</h2>
+    <ul>
+      <li>De fleste forlag kræver, at brugen af AI oplyses, typisk i metodeafsnittet eller en erklæring</li>
+      <li>En sprogmodel kan ikke være medforfatter. Ansvar kan ikke uddelegeres</li>
+      <li>Sproghjælp og kodeassistance er bredt accepteret; genererede resultater er det ikke</li>
+      <li>Tjek det konkrete tidsskrifts politik, før I indsender; de er ikke ens</li>
+    </ul>
+    <div class="def-box" style="margin-top:18px;">
+      <div class="def-term">Tommelfingerregel</div>
+      <p class="def-body">Hvis I ville være utrygge ved, at en reviewer så, hvordan et afsnit blev til, så er det afsnit ikke færdigt.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 23 · TRE POINTER ==================== -->
+<section>
+  <div class="slide-body">
+    <hr class="sig-rule">
+    <h2>Tre ting at tage med</h2>
+    <div class="close-grid">
+      <div class="close-col">
+        <span class="close-label">Kend landskabet</span>
+        <p>Chat-assistenter, forskningsværktøjer, agentiske værktøjer og de europæiske alternativer. Verifikation over det hele.</p>
+      </div>
+      <div class="close-col">
+        <span class="close-label">Kend jeres data</span>
+        <p>Spørg om patientdata, før I indsætter noget. Er I i tvivl, er svaret nej.</p>
+      </div>
+      <div class="close-col">
+        <span class="close-label">Byg kontrollen ind</span>
+        <p>Stol aldrig på ét gennemløb. Regler og uafhængig kontrol er det, der gør sproget ærligt.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 25 · TAK OG SPØRGSMÅL ==================== -->
+<section data-background-color="#EAE5DD">
+  <div style="text-align: left; max-width: 680px; margin: 0 auto; padding-top: 20px;">
+    <hr class="sig-rule">
+    <h2 style="margin-bottom:10px;">Tak og spørgsmål</h2>
+    <p style="font-family: var(--serif); font-style: italic; font-size: 0.9em; color: var(--stone-600); line-height: 1.8; margin-bottom: 32px;">
+      Vi har en halv time.<br>
+      Intet spørgsmål er for praktisk.
+    </p>
+    <hr class="divider">
+    <p style="font-family: var(--sans); font-size: 0.48em; color: var(--stone-400); line-height: 1.8; margin-top: 16px;">
+      Auden Nordberg Krauska<br>
+      Oktober 2026
+    </p>
+  </div>
+</section>
+
+<!-- ==================== FAQ 1 · KLINISK ARBEJDE ==================== -->
+<section>
+  <div class="slide-body">
+    <span class="faq-tag">Spørgsmål</span>
+    <p class="faq-q">"Kan jeg bruge det til klinisk arbejde, fx journalnotater og patientbreve?"</p>
+    <hr class="sig-rule">
+    <p class="lead">Det er en anden risikokategori end forskning, og dagens foredrag handler bevidst om forskning.</p>
+    <ul>
+      <li>Samme dataregler gælder, og patientbreve er per definition patientdata</li>
+      <li>Oveni kommer klinisk ansvar: en fejl i et brev er en fejl over for en patient</li>
+      <li>Skal det ske, skal det ske i et værktøj, regionen eller klinikken har godkendt til formålet</li>
+    </ul>
+    <p class="coda">Kort svar: ikke i en personlig konto, og ikke uden en godkendt løsning bag.</p>
+  </div>
+</section>
+
+<!-- ==================== FAQ 2 · SNYD / TIDSSKRIFTER ==================== -->
+<section>
+  <div class="slide-body">
+    <span class="faq-tag">Spørgsmål</span>
+    <p class="faq-q">"Er det snyd? Afviser tidsskrifterne artikler skrevet med AI?"</p>
+    <hr class="sig-rule">
+    <ul>
+      <li>Hjælp til sprog, struktur og kode er ikke snyd. Det er assistance på linje med en sprogredaktør eller en statistiker</li>
+      <li>Snyd er: fabrikerede data, opfundne referencer, eller påstande, ingen har tjekket</li>
+      <li>De fleste tidsskrifter tillader assistance, kræver at den oplyses, og afviser AI som forfatter</li>
+      <li>Politikkerne varierer, så tjek det konkrete tidsskrift</li>
+    </ul>
+    <p class="coda">Skellet går ikke ved, om I brugte værktøjet. Det går ved, om I står inde for resultatet.</p>
+  </div>
+</section>
+
+<!-- ==================== FAQ 3 · PRIS ==================== -->
+<section>
+  <div class="slide-body">
+    <span class="faq-tag">Spørgsmål</span>
+    <p class="faq-q">"Hvad koster det?"</p>
+    <hr class="sig-rule">
+    <table class="cmp">
+      <tbody>
+        <tr>
+          <td class="tool">Elicit</td>
+          <td>Gratis basisversion. Betalte planer giver flere søgninger og udtræk.</td>
+        </tr>
+        <tr>
+          <td class="tool">Claude / ChatGPT</td>
+          <td>Gratis version findes. Pro-abonnement ca. 20 USD, omkring 140 kr. om måneden.</td>
+        </tr>
+        <tr>
+          <td class="tool">Claude Code</td>
+          <td>Indgår i Pro-abonnementet (samme pris). Kan også betales pr. brug via API.</td>
+        </tr>
+        <tr>
+          <td class="tool">Institutionelt</td>
+          <td>Spørg. Mange universiteter og regioner har allerede licenser, I kan bruge.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="coda">Priserne opkræves i dollars og ændrer sig. Tjek udbyderens side for de aktuelle tal.</p>
+  </div>
+</section>
+
+<!-- ==================== FAQ 4 · DANSK ==================== -->
+<section>
+  <div class="slide-body">
+    <span class="faq-tag">Spørgsmål</span>
+    <p class="faq-q">"Virker det på dansk?"</p>
+    <hr class="sig-rule">
+    <ul>
+      <li>Ja. Modellerne er gode til dansk, men stærkest på engelsk</li>
+      <li>Fint til udkast, oversættelse og sprogrettelse begge veje</li>
+      <li>Vær ekstra opmærksom på fagtermer: klinisk terminologi på dansk kan blive oversat forkert eller "engelsk-agtigt"</li>
+      <li>Litteratursøgning foregår i praksis på engelsk, fordi litteraturen gør</li>
+    </ul>
+    <p class="coda">Et godt trick: skriv jeres instruktioner på dansk, og lad modellen skrive artiklen på engelsk. Så tænker I i jeres eget sprog og publicerer i feltets.</p>
+  </div>
+</section>
+
+<!-- ==================== FAQ 5 · UDEN PROGRAMMERING ==================== -->
+<section>
+  <div class="slide-body">
+    <span class="faq-tag">Spørgsmål</span>
+    <p class="faq-q">"Hvordan lærer jeg Claude Code uden at kunne programmere?"</p>
+    <hr class="sig-rule">
+    <p class="lead">Ærligt svar: der er en indlæringskurve, og den handler mest om at blive tryg ved en terminal og en mappestruktur, ikke om at kunne kode.</p>
+    <ul>
+      <li>I skriver på almindeligt sprog. Modellen skriver koden</li>
+      <li>Det, I skal lære, er at læse output kritisk og stille de rigtige opfølgende spørgsmål</li>
+      <li>Start med noget, I allerede kender svaret på, så I kan se, om værktøjet gør det rigtigt</li>
+      <li>Første gang: gør det sammen med en, der har prøvet det før; det halverer kurven</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== FAQ 6 · DESKILLING ==================== -->
+<section>
+  <div class="slide-body">
+    <span class="faq-tag">Spørgsmål</span>
+    <p class="faq-q">"Gør det os ikke dårligere som forskere?"</p>
+    <hr class="sig-rule">
+    <p class="lead">Det kan det, hvis man bruger det til at slippe for at tænke. Men det er ikke det, jeg har vist i dag.</p>
+    <ul>
+      <li>Den proces, jeg viste, kræver <em>mere</em> metodisk klarhed, ikke mindre: reglerne skal skrives ned, før modellen kan følge dem</li>
+      <li>Færdigheden flytter sig fra at formulere til at specificere og kontrollere</li>
+      <li>Det, der bliver overflødigt, er standardarbejde. Det, der bliver vigtigere, er dømmekraft</li>
+    </ul>
+    <p class="coda">Spørgsmålet er ikke, om værktøjet gør os dårligere. Det er, om vi bruger det på en måde, der holder os skarpe.</p>
+  </div>
+</section>
+
+<!-- ==================== FAQ 7 · HVILKEN MODEL ==================== -->
+<section>
+  <div class="slide-body">
+    <span class="faq-tag">Spørgsmål</span>
+    <p class="faq-q">"Claude eller ChatGPT? Hvilken skal jeg vælge?"</p>
+    <hr class="sig-rule">
+    <ul>
+      <li>Til almindelig skrivehjælp er forskellen lille. Vælg den, jeres institution har godkendt</li>
+      <li>Det afgørende er ikke modellen, men indstillingerne: træning slået fra, og ingen patientdata</li>
+      <li>Til det, jeg viste i dag, brugte jeg Claude Code, fordi det er bygget til agenter i en projektmappe</li>
+      <li>Modellerne skifter hvert halve år. Processen, jeg viste, gør ikke</li>
+    </ul>
+    <p class="coda">Lær processen, ikke produktet.</p>
+  </div>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  fragmentInURL: false,
+  slideNumber: true,
+  controls: true,
+  progress: false,
+  transition: 'none',
+  width: 1200,
+  height: 700,
+  margin: 0.08,
+  center: false,
+  plugins: [ RevealNotes ]
+});
+</script>
+</body>
+</html>

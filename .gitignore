@@ -1,0 +1,34 @@
+# Data never goes into git. Only the README is tracked.
+data/*
+!data/README.md
+
+# Personal Claude Code settings
+.claude/settings.local.json
+
+# macOS
+.DS_Store
+
+# R / RStudio
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# Word lock files
+~$*
