@@ -50,8 +50,13 @@ The manuscript lives in `manuscript/`, one file per section.
 
 ## References
 
-- `references.bib` holds only checked references. Each entry has a comment above it: `% CHECKED <date> <initials>: <what the source actually says>`.
-- An entry without that comment is not ready for the manuscript. Flag it.
+Every reference passes two checks, in this order:
+
+1. **CrossRef (you).** Run the `crossref-check` skill on every reference you suggest, and on every entry in `references.bib`. It confirms the reference exists and that author, title, year and journal match. A reference without a match is flagged **NO MATCH** on the list in `todo.md` for human review. Never replace it with the nearest search result.
+2. **Reading (the user).** A person opens the source and confirms it says what the sentence claims. They record it as `% CHECKED <date> <initials>: <what the source actually says>` above the entry. Never write a `CHECKED` line yourself.
+
+- A CrossRef match proves the paper exists. It does not prove the paper supports the sentence.
+- `references.bib` holds only references that have passed both checks. An entry without both a `% CROSSREF` and a `% CHECKED` line is not ready for the manuscript. Flag it.
 - Before adding a citation, check whether `references.bib` already has it.
 
 ## Checking agents

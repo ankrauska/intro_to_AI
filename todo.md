@@ -17,9 +17,11 @@ Each item says what to do and where. Items from feedback point back to their fil
 
 ## References to verify
 
-A reference suggested by the model is a task, not a source. It moves to `references.bib` only when it has been opened, read and confirmed.
+A reference suggested by the model is a task, not a source. Claude checks it against CrossRef first (`crossref-check` skill). It moves to `references.bib` only when a person has opened it, read it and confirmed it.
 
-| Reference | Suggested for (file, sentence) | Found? | Read? | Supports the sentence? |
+**NO MATCH** in the CrossRef column means CrossRef has no record that matches author, title, year and journal. A person finds the source by hand before anything else happens to it. Books, guidelines and reports are often missing from CrossRef, so a no match is not proof the source is invented.
+
+| Reference | Suggested for (file, sentence) | CrossRef | Read? | Supports the sentence? |
 | :--- | :--- | :--- | :--- | :--- |
 | | | | | |
 
