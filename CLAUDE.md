@@ -68,6 +68,10 @@ Two agents in `.claude/agents/` check work independently:
 
 Use them after any change to the analysis or to a results or discussion section. Report their findings to the user as they are. Do not fix a finding and then report it as absent.
 
+## Second opinions
+
+When the user wants a review, critique or fact-check from outside, use the `second-opinion` skill. The prompt goes in `advisors/` and contains the work itself, not our interpretation of it. No patient data goes in a prompt. Answers are saved verbatim next to the prompt and never edited.
+
 ## Feedback
 
 Meeting notes and reviewer comments go in `feedback/` as received. Do not edit them. When asked, turn them into concrete items in `todo.md`, each pointing back to its source file.
