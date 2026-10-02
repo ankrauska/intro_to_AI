@@ -32,3 +32,7 @@ __pycache__/
 
 # Word lock files
 ~$*
+
+# API keys and other secrets
+.env
+.env.*

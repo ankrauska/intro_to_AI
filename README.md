@@ -7,13 +7,18 @@ This folder is an empty research project that takes a trial from idea to paper: 
 ## Getting started
 
 1. Download the folder: **Code → Download ZIP** on GitHub, and unzip it.
-2. Install Claude Code. It needs a paid Claude plan (Pro or higher).
+2. Install Claude Code.
    - **Mac:** in Terminal, run `curl -fsSL https://claude.ai/install.sh | bash`
    - **Windows:** install [Git for Windows](https://git-scm.com) first, then in PowerShell run `irm https://claude.ai/install.ps1 | iex`
 
-   See the [setup guide](https://code.claude.com/docs/en/setup) if anything goes wrong. The first time you type `claude`, a browser opens for you to log in.
+   See the [setup guide](https://code.claude.com/docs/en/setup) if anything goes wrong.
 3. Open a terminal in the folder. **Mac:** open Terminal, type `cd ` (with a space), drag the folder into the window, and press Enter. **Windows:** right-click the folder in File Explorer and choose *Open in Terminal*.
-4. Type `claude`, then `start`.
+4. Give the terminal your **API key** (the workshop uses one; it starts with `sk-ant-`). This lasts until the window closes.
+   - **Mac:** `export ANTHROPIC_API_KEY="sk-ant-..."`
+   - **Windows:** `$env:ANTHROPIC_API_KEY = "sk-ant-..."`
+
+   Use the key you were given, or create one in the Anthropic Console (platform.claude.com). API use is paid per use. Treat the key like a credit card: never share it, and never save it in this folder, where it could end up on GitHub. With a Claude subscription (Pro or higher) instead, skip this step and log in through the browser the first time you type `claude`.
+5. Type `claude`, then `start`. The first time, Claude asks whether to use the API key: answer yes. Type `/status` inside Claude to check which login it is using.
 
 Claude writes the analysis code in **R**. To run it yourself, install R from [cran.r-project.org](https://cran.r-project.org).
 

@@ -4,14 +4,20 @@
 
 ## Første gang: installér
 
-Claude Code kræver et betalt abonnement (Pro eller højere). Gratisversionen er ikke nok.
-
 - **Mac:** åbn **Terminal** og indsæt
   `curl -fsSL https://claude.ai/install.sh | bash`
 - **Windows:** installér først **Git for Windows** (git-scm.com). Åbn derefter **PowerShell** og indsæt
   `irm https://claude.ai/install.ps1 | iex`
 
-Første gang I skriver `claude`, åbner en browser, hvor I logger ind med jeres Claude-konto.
+## Første gang: API-nøgle
+
+Til workshoppen bruger vi en **API-nøgle** (den starter med `sk-ant-`). Brug den, I har fået, eller opret en i Anthropic Console (platform.claude.com). API'et betales efter forbrug.
+
+**Pas på nøglen, som var den et kreditkort.** Del den ikke, og gem den aldrig i projektmappen. Så kan den ende på GitHub.
+
+Første gang Claude starter med nøglen, spørger den, om den må bruge den: svar ja. Skriv `/status` i Claude for at se, at den bruger API-nøglen.
+
+Har I et Claude-abonnement (Pro eller højere) i stedet, så spring nøglen over. Første gang I skriver `claude`, logger I ind i browseren.
 
 **R:** Claude skriver analysekoden i R. Vil I køre den selv, skal R være installeret (cran.r-project.org).
 
@@ -19,8 +25,11 @@ Første gang I skriver `claude`, åbner en browser, hvor I logger ind med jeres 
 
 1. **Mac:** åbn Terminal, skriv `cd ` (med mellemrum), træk projektmappen ind i vinduet, og tryk Enter.
    **Windows:** højreklik på projektmappen i Stifinder, og vælg *Åbn i Terminal*.
-2. Skriv `claude` og tryk Enter.
-3. Skriv `start`. Første gang forklarer Claude mappen og hjælper jer med at udfylde `plan.md`. Senere fortæller den, hvor I slap.
+2. Giv terminalen nøglen (gælder, til vinduet lukkes). Indsæt jeres egen nøgle:
+   **Mac:** `export ANTHROPIC_API_KEY="sk-ant-..."`
+   **Windows:** `$env:ANTHROPIC_API_KEY = "sk-ant-..."`
+3. Skriv `claude` og tryk Enter.
+4. Skriv `start`. Første gang forklarer Claude mappen og hjælper jer med at udfylde `plan.md`. Senere fortæller den, hvor I slap.
 
 ## Det, I skriver til Claude
 
