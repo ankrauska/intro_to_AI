@@ -32,7 +32,7 @@ You write in plain language, in Danish if you like. The model writes the code.
 | `feedback/` | Co-author meeting notes and reviewer comments, as received. | No, source material |
 | `advisors/` | Second opinions: prompts sent to another model, and the answers. | No, a record |
 | `.claude/agents/` | Two checking agents: one reruns the code, one checks each claim. | Yes |
-| `.claude/skills/` | Skills: `crossref-check` looks up every reference in CrossRef; `second-opinion` writes review prompts for another model. | Yes |
+| `.claude/skills/` | Skills: `crossref-check` looks up every reference in CrossRef; `second-opinion` writes review prompts for another model; `statistician-brief` writes a reference sheet for a statistician. | Yes |
 | `slides/` | The talk. | No |
 
 The four files `CLAUDE.md`, `style.md`, `plan.md` and `todo.md` are the infrastructure. Fill them in before you ask the model to write anything.
@@ -45,4 +45,5 @@ The four files `CLAUDE.md`, `style.md`, `plan.md` and `todo.md` are the infrastr
 - **Checking:** ask for `code-check` to rerun the analysis and compare the numbers, and for `claim-check` to go through a section sentence by sentence. The agents find mismatches. They do not decide what is true. You do.
 - **References:** a suggested reference is a task, not a source. Claude first looks it up in CrossRef (the DOI registry) with the `crossref-check` skill. If nothing matches, it is flagged **NO MATCH** in `todo.md` for you to find by hand. Either way it stays on the list until you have opened it and added a `CHECKED` comment to `references.bib`. A CrossRef match shows the paper exists, not that it says what your sentence claims.
 - **Second opinions:** ask for a second opinion on a protocol, analysis plan or section. Claude writes a prompt to `advisors/` that contains the work but not your reasoning. Paste it into another model your institution allows and save the reply next to it, or let a Claude subagent with a fresh context answer. Two readers who disagree have found something worth looking at.
+- **Statistical help:** ask for a statistician brief before you meet a statistician. Claude collects the hypothesis, the variables and how they are measured, your question, and your planned analyses into one sheet in `advisors/`. Anything it cannot find in the project, it asks you about or marks `unknown`. It does not change your plan; if it sees a problem, it tells you separately.
 - **Co-authors:** drop meeting notes into `feedback/` and ask the model to turn them into items in `todo.md`.
