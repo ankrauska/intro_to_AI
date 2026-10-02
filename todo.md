@@ -1,6 +1,6 @@
 # To do
 
-**[!]** blocks other work. **[C]** Claude. **[Y]** you. Add a tag for each co-author, e.g. **[H]** Hannah.
+**[!]** blocks other work. **[C]** Claude. **[Y]** you. Add a tag for each co-author, using their initials, e.g. **[AB]**.
 
 Each item says what to do and where. Items from feedback point back to their file in `feedback/`.
 

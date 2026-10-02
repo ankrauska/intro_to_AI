@@ -753,15 +753,17 @@
     <h2>Citationer: foreslået af modellen, valideret af jer</h2>
     <p class="lead" style="margin-bottom:8px;">En foreslået reference er en opgave, ikke en kilde, før I selv har åbnet den.</p>
     <ul>
-      <li>Hver foreslået reference ryger på en liste i <span class="em">todo.md</span>: fundet, læst, bekræftet?</li>
-      <li>I BibTeX-filen får hver post en kommentar: hvem tjekkede, hvornår, og hvad kilden faktisk siger</li>
-      <li>En reference uden kommentar er ikke klar til manuskriptet</li>
-          </ul>
+      <li>Claude slår hver reference op i <span class="em">CrossRef</span>, DOI-registret. Forfatter, titel, år og tidsskrift skal passe</li>
+      <li>Intet match: referencen markeres NO MATCH i <span class="em">todo.md</span>, og I finder den selv</li>
+      <li>Et match viser kun, at artiklen findes. I BibTeX-filen skriver I selv, hvad kilden faktisk siger</li>
+    </ul>
     <div class="def-box" style="margin-top:8px; padding:10px 18px;">
-      <p class="def-body" style="font-family:'DejaVu Sans Mono',Menlo,Consolas,monospace; font-size:0.52em; line-height:1.7; white-space:pre;">% TJEKKET 2026-09-12 ANK: RCT, n=84. Effekt ved 12 mdr., IKKE 24.
+      <p class="def-body" style="font-family:'DejaVu Sans Mono',Menlo,Consolas,monospace; font-size:0.52em; line-height:1.7; white-space:pre;">% CROSSREF 2026-09-11: match, doi 10.xxxx/xxxxx
+% CHECKED 2026-09-12 ANK: RCT, n=84. Effekt ved 12 mdr., IKKE 24.
 @article{nielsen2024, ...}</p>
     </div>
   </div>
+  <aside class="notes">Eksempel fra forberedelsen af workshoppen: CrossRef fangede, at CONSORT 2025 var citeret med det forkerte bind (388 i stedet for 389). Den rigtige artikel, ét forkert felt. Den slags fejl overlever ellers i årevis.</aside>
 </section>
 
 <!-- ==================== 8b · EUROPÆISKE MODELLER ==================== -->
@@ -987,7 +989,7 @@
 <section data-background-color="#2E3A5C">
   <div class="section-break-inner">
     <div class="section-num">Del III</div>
-    <div class="section-title">Fra data til manuskript med Claude Code</div>
+    <div class="section-title">Fra protokol til manuskript med Claude Code</div>
     <div class="section-sub">Arbejdsgangen fra del I, vist på en rigtig artikel</div>
   </div>
 </section>
@@ -1148,30 +1150,35 @@
   <div class="slide-body">
     <hr class="sig-rule">
     <h2>Hele processen</h2>
-    <div class="stat-row" style="grid-template-columns: 1fr 1fr 1fr 1fr; gap:20px;">
+    <div class="stat-row" style="grid-template-columns: repeat(5, 1fr); gap:16px;">
       <div class="stat-item">
-        <span class="stat-num" style="font-size:1.2em;">Data</span>
+        <span class="stat-num" style="font-size:1.0em;">Protokol</span>
         <span class="stat-accent"></span>
-        <span class="stat-desc">Anonymiseret i mappen, eller helt uden for den</span>
+        <span class="stat-desc">Afsnit for afsnit efter SPIRIT 2025. Låses, når den er færdig</span>
       </div>
       <div class="stat-item">
-        <span class="stat-num" style="font-size:1.2em;">Analyse</span>
+        <span class="stat-num" style="font-size:1.0em;">Analyseplan</span>
         <span class="stat-accent"></span>
-        <span class="stat-desc">Kode skrevet, kørt og genkørt</span>
+        <span class="stat-desc">Låses, før nogen ser resultater fordelt på grupper</span>
       </div>
       <div class="stat-item">
-        <span class="stat-num" style="font-size:1.2em;">Resultater</span>
+        <span class="stat-num" style="font-size:1.0em;">Analyse</span>
         <span class="stat-accent"></span>
-        <span class="stat-desc">Output som teksten skal spores til</span>
+        <span class="stat-desc">Kode kørt og genkørt, dér hvor data må ligge</span>
       </div>
       <div class="stat-item">
-        <span class="stat-num" style="font-size:1.2em;">Manuskript</span>
+        <span class="stat-num" style="font-size:1.0em;">Resultater</span>
         <span class="stat-accent"></span>
-        <span class="stat-desc">Skrevet efter reglerne, tjekket påstand for påstand</span>
+        <span class="stat-desc">Output, som teksten skal spores til</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" style="font-size:1.0em;">Manuskript</span>
+        <span class="stat-accent"></span>
+        <span class="stat-desc">Efter CONSORT 2025, tjekket påstand for påstand</span>
       </div>
     </div>
     <hr class="divider">
-    <p class="lead">Kontrol sidder i hver samling mellem trinnene, ikke som en gennemlæsning til sidst. Og data behøver ikke ligge i mappen: den kan nøjes med analysekoden, som køres lokalt, hvor data er, så kun resultaterne lander i projektet.</p>
+    <p class="lead">Kontrol sidder i hver samling mellem trinnene, ikke som en gennemlæsning til sidst. Og en låst plan kan kun ændres som en dateret ændring, der skal stå i artiklen.</p>
   </div>
 </section>
 
@@ -1356,7 +1363,7 @@
     </table>
     <p class="coda">Tallene bygger på nogle af de højere gennemsnit.</p>
   </div>
-  <aside class="notes">Antagelser: 0,033 Wh pr. token (o3 på høj ræsonnering), 450 g CO₂e pr. kWh (700 g på kulstrøm), 50 g pr. times streaming, 0,25 kg pr. km i benzinbil, 0,05 kg pr. km i elbil, 3,5 kg pr. burger. Med 10 kg pr. burger bliver det ca. 0,75 burger. Alle tal er estimater. Find kilder til dem før foredraget.</aside>
+  <aside class="notes">Antagelser: 0,033 Wh pr. token (o3 på høj ræsonnering), 450 g CO₂e pr. kWh (700 g på kulstrøm), 50 g pr. times streaming, 0,25 kg pr. km i benzinbil, 0,05 kg pr. km i elbil, 3,5 kg pr. burger. Med 10 kg pr. burger bliver det ca. 0,75 burger. Alle tal er estimater.</aside>
 </section>
 
 <!-- ==================== FAQ 4 · DANSK ==================== -->

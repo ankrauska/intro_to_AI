@@ -2,13 +2,25 @@
 
 **Den hårde regel:** ingen identificerbare patientdata i mappen eller i en samtale med Claude.
 
-## Kom i gang
+## Første gang: installér
 
-1. Åbn **Terminal**. Skriv `cd ` (med mellemrum), træk projektmappen ind i vinduet, og tryk Enter.
+Claude Code kræver et betalt abonnement (Pro eller højere). Gratisversionen er ikke nok.
+
+- **Mac:** åbn **Terminal** og indsæt
+  `curl -fsSL https://claude.ai/install.sh | bash`
+- **Windows:** installér først **Git for Windows** (git-scm.com). Åbn derefter **PowerShell** og indsæt
+  `irm https://claude.ai/install.ps1 | iex`
+
+Første gang I skriver `claude`, åbner en browser, hvor I logger ind med jeres Claude-konto.
+
+**R:** Claude skriver analysekoden i R. Vil I køre den selv, skal R være installeret (cran.r-project.org).
+
+## Hver gang
+
+1. **Mac:** åbn Terminal, skriv `cd ` (med mellemrum), træk projektmappen ind i vinduet, og tryk Enter.
+   **Windows:** højreklik på projektmappen i Stifinder, og vælg *Åbn i Terminal*.
 2. Skriv `claude` og tryk Enter.
-3. Skriv `start`. Claude forklarer mappen og hjælper jer med at udfylde `plan.md`.
-
-Næste gang: samme trin. `start` fortæller, hvor I slap.
+3. Skriv `start`. Første gang forklarer Claude mappen og hjælper jer med at udfylde `plan.md`. Senere fortæller den, hvor I slap.
 
 ## Det, I skriver til Claude
 

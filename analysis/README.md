@@ -13,7 +13,9 @@ Scripts behind every number in the manuscript. Output goes to `output/`, and the
 
 ## Requirements
 
-<!-- Language and version, packages and versions. e.g. R 4.5.0, tidyverse 2.0.0. -->
+R, unless the project decides otherwise. Install it from [cran.r-project.org](https://cran.r-project.org).
+
+<!-- Version and packages, e.g. R 4.5.0, tidyverse 2.0.0. -->
 
 ## Seed
 

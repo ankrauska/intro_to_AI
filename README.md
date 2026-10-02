@@ -7,9 +7,15 @@ This folder is an empty research project that takes a trial from idea to paper: 
 ## Getting started
 
 1. Download the folder: **Code → Download ZIP** on GitHub, and unzip it.
-2. Install Claude Code: see [docs.claude.com/claude-code](https://docs.claude.com/en/docs/claude-code/overview). It comes with a Claude Pro subscription.
-3. Open **Terminal**, type `cd ` (with a space), drag the folder into the window, and press Enter.
+2. Install Claude Code. It needs a paid Claude plan (Pro or higher).
+   - **Mac:** in Terminal, run `curl -fsSL https://claude.ai/install.sh | bash`
+   - **Windows:** install [Git for Windows](https://git-scm.com) first, then in PowerShell run `irm https://claude.ai/install.ps1 | iex`
+
+   See the [setup guide](https://code.claude.com/docs/en/setup) if anything goes wrong. The first time you type `claude`, a browser opens for you to log in.
+3. Open a terminal in the folder. **Mac:** open Terminal, type `cd ` (with a space), drag the folder into the window, and press Enter. **Windows:** right-click the folder in File Explorer and choose *Open in Terminal*.
 4. Type `claude`, then `start`.
+
+Claude writes the analysis code in **R**. To run it yourself, install R from [cran.r-project.org](https://cran.r-project.org).
 
 `start` explains the folder, interviews you about your study, and fills in `plan.md` with you. Write in plain language, in Danish if you like. Claude writes any code.
 
@@ -49,6 +55,7 @@ Claude works section by section and asks for the facts it needs. It never invent
 | `.claude/agents/` | `code-check` reruns the analysis; `claim-check` checks each claim. |
 | `.claude/settings.json` | What Claude may do without asking, and what it may not do at all. |
 | `slides/` | The talk. |
+| `LICENSE` | CC BY 4.0: reuse and adapt freely, with credit. |
 
 Folders starting with a dot are hidden in Finder. Press `Cmd + Shift + .` to show them.
 
@@ -61,3 +68,7 @@ Folders starting with a dot are hidden in Finder. Press `Cmd + Shift + .` to sho
 - **Second opinions:** Claude writes a prompt to `advisors/` that contains the work but not your reasoning. Paste it into another model your institution allows, or let a fresh Claude subagent answer.
 - **Statistical help:** `write a statistician brief` collects your hypothesis, variables, question and planned analyses into one sheet for a statistician.
 - **Co-authors:** put meeting notes in `feedback/` and ask Claude to turn them into tasks.
+
+## License
+
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). You may reuse and adapt everything here, including for your own projects and teaching, as long as you credit Auden Nordberg Krauska. The `second-opinion` skill is adapted from Karl Rohe's [`ea`](https://github.com/karlrohe/ea).

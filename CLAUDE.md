@@ -80,6 +80,7 @@ The protocol, the SAP and the manuscript work the same way: one file per section
 
 ## Analysis
 
+- Write analysis code in R, unless the user asks for another language.
 - Scripts go in `analysis/`. Follow the conventions in `analysis/README.md` (numbered run order, fixed seed, output to `analysis/output/`).
 - Run the code after writing it. Report what it printed, including warnings.
 - Replaced scripts move to `analysis/superseded/`. Do not delete them.
