@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s \"https://api.crossref.org/*)",
+      "Bash(curl -s -G \"https://api.crossref.org/*)",
+      "Bash(diff *)",
+      "Bash(cp * */llm_originals/*)",
+      "Bash(Rscript analysis/*)"
+    ],
+    "deny": [
+      "Read(/data/**/*.csv)",
+      "Read(/data/**/*.tsv)",
+      "Read(/data/**/*.txt)",
+      "Read(/data/**/*.xlsx)",
+      "Read(/data/**/*.xls)",
+      "Read(/data/**/*.json)",
+      "Read(/data/**/*.sav)",
+      "Read(/data/**/*.dta)",
+      "Read(/data/**/*.sas7bdat)",
+      "Read(/data/**/*.rds)",
+      "Read(/data/**/*.RData)",
+      "Read(/data/**/*.rda)",
+      "Read(/data/**/*.parquet)",
+      "Read(/data/**/*.docx)",
+      "Read(/data/**/*.pdf)"
+    ]
+  }
+}

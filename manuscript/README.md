@@ -1,6 +1,8 @@
 # Manuscript
 
-One file per section, numbered in reading order: `01_introduction.md`, `02_methods.md`, `03_results.md`, `04_discussion.md`, plus `00_abstract.md` when the rest is done.
+One file per section, numbered in reading order: `01_introduction.md`, `02_methods.md`, `03_results.md`, `04_discussion.md`, plus `00_abstract.md` when the rest is done. Drafted with the `draft-manuscript` skill once the protocol and SAP are locked and the analysis has run.
+
+`consort_2025_checklist.md` tracks the CONSORT 2025 items, built from the official checklist at [consort-spirit.org](https://www.consort-spirit.org/).
 
 ## `llm_originals/`
 

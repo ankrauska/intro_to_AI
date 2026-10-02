@@ -59,6 +59,19 @@ groundbreaking, paradigm shift, profound, novel (unless it is), crucial, critica
 >
 > **After:** Follow-up was incomplete for 31% of participants, and those lost were more often from lower-income households. The estimate is therefore likely biased upward.
 
+## Protocols and analysis plans
+
+A protocol and a SAP are plans, written before the trial runs. Another team must be able to follow them without asking a question. The rules above apply, plus these:
+
+- **Tense marks status.** The future for what will be done ("We will randomize children 1:1"). The present for definitions ("The primary outcome is the score at 36 months"). The manuscript reports in the past tense.
+- **Active voice where the actor matters.** In a protocol it usually does: who randomizes, who assesses, who is blinded. "Two audiologists who do not know the group assess each child", not "each child is assessed".
+- **Give the rule, not the intention.** "As appropriate", "where relevant", "if necessary" and "standard methods" are not allowed unless a rule follows.
+- **Define every working term once,** where it first matters, operationally.
+- **Name the software and version.**
+- **Say "is", not "serves as".** "The registry is the source of baseline data", not "serves as" or "functions as".
+
+The thinking errors that are not about prose are in `writing/protocol_sap_patterns.md`.
+
 ## Language
 
 Instructions to the model can be in Danish. The manuscript is in English unless `plan.md` says otherwise. Check that clinical terms are the ones your field uses, not literal translations.

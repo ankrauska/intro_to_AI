@@ -28,11 +28,10 @@ A 404 means CrossRef has no record of that DOI. A wrong or invented DOI is a **n
 **Without a DOI**, search with the citation as written (authors, year, title, journal):
 
 ```bash
-curl -s -G "https://api.crossref.org/works" \
-  --data-urlencode "query.bibliographic=Landis Koch 1977 The measurement of observer agreement for categorical data Biometrics" \
-  --data-urlencode "rows=5" \
-  --data-urlencode "select=DOI,title,author,issued,container-title,volume,page,type"
+curl -s -G "https://api.crossref.org/works" --data-urlencode "query.bibliographic=Landis Koch 1977 The measurement of observer agreement for categorical data Biometrics" --data-urlencode "rows=5" --data-urlencode "select=DOI,title,author,issued,container-title,volume,page,type"
 ```
+
+Keep each lookup on one line, starting exactly as above. The project's settings let these two forms run without asking the user each time.
 
 Keep to one request at a time. Do not loop over many references in parallel.
 

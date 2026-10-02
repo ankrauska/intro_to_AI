@@ -1,6 +1,24 @@
 # Plan
 
-What the paper must show, what it must not show, and how that has changed. The model reads this before every task. Fill in the first three sections before asking it to write anything.
+What the study must show, what it must not show, and how that has changed. Claude reads this before every task. Fill in the stage and the first three sections before asking it to draft anything. Typing `start` in Claude Code does this with you.
+
+## Stage
+
+**Current stage:** protocol
+
+<!-- One of: protocol / sap / running / manuscript. Change it when a stage is finished. -->
+
+| Stage | What happens | Guideline | Open for drafting | Locked |
+| :--- | :--- | :--- | :--- | :--- |
+| protocol | The plan for the trial | SPIRIT 2025 | `protocol/` | |
+| sap | The statistical analysis plan | Gamble et al. 2017, ICH E9(R1) | `sap/`, `analysis/` (code written on simulated or blinded data) | `protocol/` |
+| running | The trial runs; data are collected | | `analysis/` | `protocol/`, `sap/` |
+| manuscript | The paper | CONSORT 2025 | `manuscript/`, `analysis/` | `protocol/`, `sap/` |
+
+| Document | Version | Date locked | Locked by |
+| :--- | :--- | :--- | :--- |
+| Protocol | | | |
+| SAP | | | |
 
 ## The question
 
@@ -40,6 +58,14 @@ Settled choices, dated, with the reason. The model does not reopen these unless 
 **Why:** 24-month scores are missing for a third of the cohort, and the missingness is related to clinic.
 **Consequence:** The 24-month result is reported only as a sensitivity analysis.
 -->
+
+## Amendments
+
+Changes to a locked protocol or SAP. The manuscript reports each one as a deviation.
+
+| Date | Document and section | What changed | Why | Outcome data seen by group before the change? |
+| :--- | :--- | :--- | :--- | :--- |
+| | | | | |
 
 ## Scope log
 
