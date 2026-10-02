@@ -997,21 +997,26 @@
   <div class="slide-body">
     <hr class="sig-rule">
     <h2>Mappen</h2>
-    <p class="lead">Skabelonen til workshoppen. Samme struktur som i mine egne projekter.</p>
+    <p class="lead">Skabelonen til workshoppen, bygget som mine egne.</p>
     <div class="def-box">
-      <pre style="font-family: 'DejaVu Sans Mono', Menlo, Consolas, monospace; font-size:0.50em; line-height:1.5; margin:0; color:var(--ink); white-space:pre; background:none; box-shadow:none; width:auto;">projekt/
+      <pre style="font-family: 'DejaVu Sans Mono', Menlo, Consolas, monospace; font-size:0.44em; line-height:1.45; margin:0; color:var(--ink); white-space:pre; background:none; box-shadow:none; width:auto;">projekt/
+  <span class="em">CLAUDE.md</span>        — sådan arbejder Claude i mappen
+  <span class="em">style.md</span>         — hvad der er forbudt, og hvad der kræves
+  <span class="em">plan.md</span>          — fase, mål, beslutninger og ændringer
+  <span class="em">todo.md</span>          — opgaver, bl.a. referencer der skal tjekkes
+  references.bib   — kun tjekkede referencer
+  protocol/        — protokollen, afsnit for afsnit
+  sap/             — analyseplanen, afsnit for afsnit
+  manuscript/      — artiklen, afsnit for afsnit
   data/            — anonymiseret data, eller kun en sti til dem
   analysis/        — scripts; output/ er det, teksten må citere
-  manuscript/      — artiklen, afsnit for afsnit
-  feedback/        — medforfatternes noter og reviews, som de kom
-  references.bib   — kun tjekkede referencer
-  <span class="em">CLAUDE.md</span>        — hvordan modellen skal arbejde i mappen
-  <span class="em">style.md</span>         — hvad der er forbudt, og hvad der kræves
-  <span class="em">plan.md</span>          — hvad artiklen skal vise, og beslutninger
-  <span class="em">todo.md</span>          — åbne opgaver, bl.a. referencer der skal tjekkes
-  .claude/agents/  — to kontrol-agenter</pre>
+  writing/         — typiske fejl og en tjekliste
+  feedback/        — medforfatternes noter og reviews
+  advisors/        — second opinions og statistiker-ark
+  .claude/         — skills, kontrol-agenter og tilladelser
+  snydeark.md      — kommandoer, og hvordan I skriver i filerne</pre>
     </div>
-    <p class="coda">De fire markerede filer er infrastrukturen. Modellen læser dem, hver gang den arbejder.</p>
+    <p class="coda">De fire markerede filer læser Claude, hver gang den arbejder.</p>
   </div>
   <aside class="notes">Vis den rigtige mappe på skærmen her. Link til skabelonen: [GITHUB-LINK]</aside>
 </section>
@@ -1025,7 +1030,7 @@
       <div>
         <span class="label">Teksten</span>
         <ul>
-          <li>Førsteudkast gemmes i manuscript/llm_originals/</li>
+          <li>Førsteudkast gemmes i llm_originals/ i hver mappe</li>
           <li>I retter i selve filen. Forskellen viser modellen jeres præferencer</li>
           <li>Kommentarer skrives direkte i teksten som XX ... XX</li>
         </ul>
